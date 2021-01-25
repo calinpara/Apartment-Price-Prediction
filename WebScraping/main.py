@@ -23,6 +23,8 @@ lst_var_13 = list()
 lst_var_14 = list()
 lst_var_15 = list()
 lst_var_16 = list()
+lst_var_17 = list()
+lst_var_18 = list()
 
 
 # FUNCTION THAT RETURNS THE LIST OF NEEDED CHARACTERISTICS
@@ -43,6 +45,27 @@ def function(string_links):
         each_row_lst_1 = column_1.find_all('li')
         column_2 = columns_lst[1].find(class_='lista-tabelara')
         each_row_lst_2 = column_2.find_all('li')
+        location = _soup.find(class_='first active').get('rel')
+        loc_string = ''.join([str(item) for item in location])
+
+        def findnth(the_string, substring, n):
+            parts = the_string.split(substring, n + 1)
+            if len(parts) <= n + 1:
+                return -1
+            return len(the_string) - len(parts[-1]) - len(substring)
+
+        indx_1 = findnth(loc_string, '/', 10)
+        indx_2 = findnth(loc_string, '/', 12)
+
+        lat_string = 'Latitudine:'
+        if 'lat' in loc_string:
+            index = loc_string.find('lat')
+            lat_string += loc_string[index + 4:indx_1]
+
+        lon_string = 'Longitudine:'
+        if 'lon' in loc_string:
+            index = loc_string.find('lon')
+            lon_string += loc_string[index + 4:indx_2]
 
         price_string = 'Pret:'
         new_price_1 = price.replace('EUR + TVA', '')
@@ -76,7 +99,8 @@ def function(string_links):
             new_lst_2.append(text_row_2)
 
         full_lst = new_lst_1 + new_lst_2
-
+        full_lst.append(lat_string)
+        full_lst.append(lon_string)
         full_lst.append(price_string)
 
         print(full_lst)
@@ -97,7 +121,9 @@ def function(string_links):
         var13 = 'Nr. garaje'
         var14 = 'Nr. locuri parcare'
         var15 = 'Nr. balcoane'
-        var16 = 'Pret'
+        var16 = 'Latitudine'
+        var17 = 'Longitudine'
+        var18 = 'Pret'
 
         lst_var0 = [item if var0 in item else 'NaN' for item in full_lst]
         lst_var1 = [item if var1 in item else 'NaN' for item in full_lst]
@@ -116,6 +142,8 @@ def function(string_links):
         lst_var14 = [item if var14 in item else 'NaN' for item in full_lst]
         lst_var15 = [item if var15 in item else 'NaN' for item in full_lst]
         lst_var16 = [item if var16 in item else 'NaN' for item in full_lst]
+        lst_var17 = [item if var17 in item else 'NaN' for item in full_lst]
+        lst_var18 = [item if var18 in item else 'NaN' for item in full_lst]
 
         def function_2(lista):
             indx = 0
@@ -145,6 +173,8 @@ def function(string_links):
         lst_var_14.append(lst_var14[function_2(lst_var14)])
         lst_var_15.append(lst_var15[function_2(lst_var15)])
         lst_var_16.append(lst_var16[function_2(lst_var16)])
+        lst_var_17.append(lst_var17[function_2(lst_var17)])
+        lst_var_18.append(lst_var18[function_2(lst_var18)])
 
     flag = True
 
@@ -187,9 +217,12 @@ df = pd.DataFrame({
     'Nr. garaje': lst_var_13,
     'Nr. locuri parcare': lst_var_14,
     'Nr. balcoane': lst_var_15,
-    'Pret': lst_var_16,
+    'Latitudine:': lst_var_16,
+    'Longitudine:': lst_var_17,
+    'Pret': lst_var_18,
+
 })
 
 print(df)
 
-df.to_csv('apartamente.csv')
+df.to_csv('apartamente2.csv')
