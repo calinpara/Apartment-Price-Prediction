@@ -25,6 +25,7 @@ lst_var_15 = list()
 lst_var_16 = list()
 lst_var_17 = list()
 lst_var_18 = list()
+lst_var_19 = list()
 
 
 # FUNCTION THAT RETURNS THE LIST OF NEEDED CHARACTERISTICS
@@ -47,6 +48,7 @@ def function(string_links):
         each_row_lst_2 = column_2.find_all('li')
         location = _soup.find(class_='first active').get('rel')
         loc_string = ''.join([str(item) for item in location])
+        zone_string = _soup.find(class_='col-lg-9 col-md-9 col-sm-9 col-xs-12').get_text()
 
         def findnth(the_string, substring, n):
             parts = the_string.split(substring, n + 1)
@@ -56,16 +58,28 @@ def function(string_links):
 
         indx_1 = findnth(loc_string, '/', 10)
         indx_2 = findnth(loc_string, '/', 12)
+        indx_3 = findnth(zone_string, 'Hartă', 0)
 
-        lat_string = 'Latitudine:'
+        lat_string = str()
         if 'lat' in loc_string:
             index = loc_string.find('lat')
+            string = 'Latitudine:'
             lat_string += loc_string[index + 4:indx_1]
+            lat_string = '{0}{1}'.format(string, lat_string)
 
-        lon_string = 'Longitudine:'
+        lon_string = str()
         if 'lon' in loc_string:
             index = loc_string.find('lon')
+            string = 'Longitudine:'
             lon_string += loc_string[index + 4:indx_2]
+            lon_string = '{0}{1}'.format(string, lon_string)
+
+        zona_string = str()
+        if 'zona' in zone_string:
+            index = zone_string.find('zona')
+            string = 'Zona:'
+            zona_string += zone_string[index + 5:indx_3 - 2]
+            zona_string = '{0}{1}'.format(string, zona_string)
 
         price_string = 'Pret:'
         new_price_1 = price.replace('EUR + TVA', '')
@@ -85,7 +99,7 @@ def function(string_links):
                 price_string += new_price_3[:index_1]
                 break
 
-        new_lst_1 = []
+        new_lst_1 = list()
         for row in each_row_lst_1:
             text_row_1 = row.get_text()
             if 'mp' in text_row_1:
@@ -93,7 +107,7 @@ def function(string_links):
                 text_row_1 = text_row_1[:index - 1]
             new_lst_1.append(text_row_1)
 
-        new_lst_2 = []
+        new_lst_2 = list()
         for row in each_row_lst_2:
             text_row_2 = row.get_text()
             new_lst_2.append(text_row_2)
@@ -101,49 +115,36 @@ def function(string_links):
         full_lst = new_lst_1 + new_lst_2
         full_lst.append(lat_string)
         full_lst.append(lon_string)
+        full_lst.append(zona_string)
         full_lst.append(price_string)
 
         print(full_lst)
 
-        var0 = 'Nr. camere'
-        var1 = 'Suprafaţă utilă:'
-        var2 = 'Suprafaţă utilă totală'
-        var3 = 'Suprafaţă construită'
-        var4 = 'Compartimentare'
-        var5 = 'Confort'
-        var6 = 'Etaj'
-        var7 = 'Nr. bucătării'
-        var8 = 'Nr. băi'
-        var9 = 'An construcţie'
-        var10 = 'Structură rezistenţă'
-        var11 = 'Tip imobil'
-        var12 = 'Regim înălţime'
-        var13 = 'Nr. garaje'
-        var14 = 'Nr. locuri parcare'
-        var15 = 'Nr. balcoane'
-        var16 = 'Latitudine'
-        var17 = 'Longitudine'
-        var18 = 'Pret'
+        tup = ('Nr. camere', 'Suprafaţă utilă:','Suprafaţă utilă totală', 'Suprafaţă construită','Compartimentare',
+               'Confort', 'Etaj', 'Nr. bucătării','Nr. băi','An construcţie', 'Structură rezistenţă', 'Tip imobil',
+               'Regim înălţime', 'Nr. garaje', 'Nr. locuri parcare', 'Nr. balcoane', 'Latitudine', 'Longitudine',
+               'Zona', 'Pret')
 
-        lst_var0 = [item if var0 in item else 'NaN' for item in full_lst]
-        lst_var1 = [item if var1 in item else 'NaN' for item in full_lst]
-        lst_var2 = [item if var2 in item else 'NaN' for item in full_lst]
-        lst_var3 = [item if var3 in item else 'NaN' for item in full_lst]
-        lst_var4 = [item if var4 in item else 'NaN' for item in full_lst]
-        lst_var5 = [item if var5 in item else 'NaN' for item in full_lst]
-        lst_var6 = [item if var6 in item else 'NaN' for item in full_lst]
-        lst_var7 = [item if var7 in item else 'NaN' for item in full_lst]
-        lst_var8 = [item if var8 in item else 'NaN' for item in full_lst]
-        lst_var9 = [item if var9 in item else 'NaN' for item in full_lst]
-        lst_var10 = [item if var10 in item else 'NaN' for item in full_lst]
-        lst_var11 = [item if var11 in item else 'NaN' for item in full_lst]
-        lst_var12 = [item if var12 in item else 'NaN' for item in full_lst]
-        lst_var13 = [item if var13 in item else 'NaN' for item in full_lst]
-        lst_var14 = [item if var14 in item else 'NaN' for item in full_lst]
-        lst_var15 = [item if var15 in item else 'NaN' for item in full_lst]
-        lst_var16 = [item if var16 in item else 'NaN' for item in full_lst]
-        lst_var17 = [item if var17 in item else 'NaN' for item in full_lst]
-        lst_var18 = [item if var18 in item else 'NaN' for item in full_lst]
+        lst_var0 = [item if tup[0] in item else 'NaN' for item in full_lst]
+        lst_var1 = [item if tup[1] in item else 'NaN' for item in full_lst]
+        lst_var2 = [item if tup[2] in item else 'NaN' for item in full_lst]
+        lst_var3 = [item if tup[3] in item else 'NaN' for item in full_lst]
+        lst_var4 = [item if tup[4] in item else 'NaN' for item in full_lst]
+        lst_var5 = [item if tup[5] in item else 'NaN' for item in full_lst]
+        lst_var6 = [item if tup[6] in item else 'NaN' for item in full_lst]
+        lst_var7 = [item if tup[7] in item else 'NaN' for item in full_lst]
+        lst_var8 = [item if tup[8] in item else 'NaN' for item in full_lst]
+        lst_var9 = [item if tup[9] in item else 'NaN' for item in full_lst]
+        lst_var10 = [item if tup[10] in item else 'NaN' for item in full_lst]
+        lst_var11 = [item if tup[11] in item else 'NaN' for item in full_lst]
+        lst_var12 = [item if tup[12] in item else 'NaN' for item in full_lst]
+        lst_var13 = [item if tup[13] in item else 'NaN' for item in full_lst]
+        lst_var14 = [item if tup[14] in item else 'NaN' for item in full_lst]
+        lst_var15 = [item if tup[15] in item else 'NaN' for item in full_lst]
+        lst_var16 = [item if tup[16] in item else 'NaN' for item in full_lst]
+        lst_var17 = [item if tup[17] in item else 'NaN' for item in full_lst]
+        lst_var18 = [item if tup[18] in item else 'NaN' for item in full_lst]
+        lst_var19 = [item if tup[19] in item else 'NaN' for item in full_lst]
 
         def function_2(lista):
             indx = 0
@@ -175,6 +176,7 @@ def function(string_links):
         lst_var_16.append(lst_var16[function_2(lst_var16)])
         lst_var_17.append(lst_var17[function_2(lst_var17)])
         lst_var_18.append(lst_var18[function_2(lst_var18)])
+        lst_var_19.append(lst_var19[function_2(lst_var19)])
 
     flag = True
 
@@ -217,10 +219,10 @@ df = pd.DataFrame({
     'Nr. garaje': lst_var_13,
     'Nr. locuri parcare': lst_var_14,
     'Nr. balcoane': lst_var_15,
-    'Latitudine:': lst_var_16,
-    'Longitudine:': lst_var_17,
-    'Pret': lst_var_18,
-
+    'Latitudine': lst_var_16,
+    'Longitudine': lst_var_17,
+    'Zona': lst_var_18,
+    'Pret': lst_var_19,
 })
 
 print(df)
