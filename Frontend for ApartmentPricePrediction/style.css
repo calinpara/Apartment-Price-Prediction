@@ -210,7 +210,32 @@ nav ul li a {
 	transition: width .3s;
 }
 
-@media only screen and (max-width: 764px) {
+
+@media only screen and (min-width: 1921px) and (max-width: 2560px) { 
+	.container-index {
+		margin-top: 300px;
+	}
+
+}
+
+
+@media only screen and (min-width: 1337px) and (max-width: 1920px) { 
+	.container-index {
+		margin-top: 400px;
+	}
+
+}
+
+
+@media only screen and (min-width: 766px) and (max-width: 1366px) { 
+	.container-index {
+		margin-top: 500px;
+	}
+
+}
+
+@media only screen and (min-width: 1px) and (max-width: 765px) {
+
 	.logo {
 		padding: 0;
 		display: none;
@@ -218,8 +243,8 @@ nav ul li a {
 
 
 	.container-index span{
-		font-size: 15px;
-		margin-bottom:10px;
+		font-size: 40px;
+		margin-bottom: 10px;
 
 		
 	}
@@ -325,10 +350,7 @@ nav ul li a {
 
 	.nav-btn i:nth-child(3) {
 		margin-top: 4px;
-	}
-
-
-	
+	}	
 }
 
 
