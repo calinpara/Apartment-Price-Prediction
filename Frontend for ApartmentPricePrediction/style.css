@@ -77,7 +77,7 @@ html {
 }
 
 .text3 {
-	letter-spacing: 4px;
+	letter-spacing: 7px;
 	font-size: 20px;
 	opacity: 0;
 	animation: ani 0.75s ease-out 2s forwards;
@@ -210,21 +210,45 @@ nav ul li a {
 	transition: width .3s;
 }
 
-@media only screen and (max-width: 764px) {
+
+@media only screen and (min-width: 1921px) and (max-width: 2560px) { 
+	.container-index {
+		margin-top: 1000px;
+	}
+
+}
+
+
+@media only screen and (min-width: 1337px) and (max-width: 1920px) { 
+	.container-index {
+		margin-top: 750px;
+	}
+
+}
+
+
+@media only screen and (min-width: 766px) and (max-width: 1366px) { 
+	.container-index {
+		margin-top: 500px;
+	}
+
+}
+
+@media only screen and (min-width: 1px) and (max-width: 765px) {
+
 	.logo {
 		padding: 0;
-		display: none;
 	}
 
 
 	.container-index span{
-		font-size: 15px;
-		margin-bottom:10px;
+		font-size: 25px;
+		margin-bottom: 40px;
 
 		
 	}
 	.container-index {
-		margin-top: 600px;
+		margin-top: 700px;
 	}
 
 
@@ -325,10 +349,7 @@ nav ul li a {
 
 	.nav-btn i:nth-child(3) {
 		margin-top: 4px;
-	}
-
-
-	
+	}	
 }
 
 
