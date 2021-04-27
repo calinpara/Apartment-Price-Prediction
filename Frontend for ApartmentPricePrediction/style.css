@@ -213,7 +213,11 @@ nav ul li a {
 
 @media only screen and (min-width: 1921px) and (max-width: 2560px) { 
 	.container-index {
+<<<<<<< HEAD
 		margin-top: 1000px;
+=======
+		margin-top: 300px;
+>>>>>>> 6b2713be1285980152a2e7761df8b84990f25555
 	}
 
 }
@@ -221,7 +225,11 @@ nav ul li a {
 
 @media only screen and (min-width: 1337px) and (max-width: 1920px) { 
 	.container-index {
+<<<<<<< HEAD
 		margin-top: 750px;
+=======
+		margin-top: 400px;
+>>>>>>> 6b2713be1285980152a2e7761df8b84990f25555
 	}
 
 }
@@ -242,8 +250,13 @@ nav ul li a {
 
 
 	.container-index span{
+<<<<<<< HEAD
 		font-size: 25px;
 		margin-bottom: 40px;
+=======
+		font-size: 40px;
+		margin-bottom: 10px;
+>>>>>>> 6b2713be1285980152a2e7761df8b84990f25555
 
 		
 	}
