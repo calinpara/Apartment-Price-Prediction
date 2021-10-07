@@ -5,19 +5,15 @@ from flask_login import login_user, logout_user, login_required
 from . import db
 
 
-
 auth = Blueprint('auth', __name__)
-
 
 @auth.route('/login.html')
 def login():
 	return render_template('login.html')
 
 
-
 @auth.route('/login.html', methods=['POST'])
 def login_post():
-
 	email = request.form.get('email')
 	password = request.form.get('password')
 	remember = True if request.form.get('remember') else False
@@ -28,11 +24,8 @@ def login_post():
 		flash("Please check your email details and try again.")
 		return redirect(url_for('auth.login'))
 
-
 	login_user(user, remember=remember)
-
 	return redirect(url_for('main.profile'))
-
 
 
 @auth.route('/register.html')
@@ -45,7 +38,6 @@ def register_post():
 	email = request.form.get('email')
 	name = request.form.get('name')
 	password = request.form.get('password')
-	
 	user = User.query.filter_by(email=email).first()
 
 	if user:
@@ -53,7 +45,6 @@ def register_post():
 		return redirect(url_for('auth.register'))
 
 	new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
-
 
 	db.session.add(new_user)
 	db.session.commit()
