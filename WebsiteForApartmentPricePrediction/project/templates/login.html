@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,73 +17,74 @@
 
 
 </head>
+
 <body class="login">
-    
-        <nav>
-            <input type="checkbox" id="nav" class="hidden">
-            <label for="nav" class="nav-btn">
-                <i></i>
-                <i></i>
-                <i></i>
-            </label>
-            <div class="logo">
-                <a href="#">PredictIt</a>
-            </div>
-            <div class="nav-wrapper">
-                <ul id="main">
-                       <li><a href="{{ url_for('main.home') }}" class="cool-link">Home</a></li>
-                    {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('main.profile') }}" class="cool-link">Profile</a></li>
-                    {% endif %}
-                    {% if not current_user.is_authenticated %}
-                    <li><a href="{{ url_for('auth.login') }}" class="cool-link">Login</a></li>
-                    <li><a href="{{ url_for('auth.register') }}" class="cool-link">Register</a></li>
-                    {% endif %}
-                    {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('auth.logout') }}" class="cool-link">Logout</a></li>
-                    {% endif %}
-                    <li><a href="{{ url_for('main.map') }}" class="cool-link">Map</a></li>
-                    <li><a href="{{ url_for('main.prediction') }}" class="cool-link">Predict</a></li>
-                    <li><a href="contact.html" class="cool-link">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
+
+    <nav>
+        <input type="checkbox" id="nav" class="hidden">
+        <label for="nav" class="nav-btn">
+            <i></i>
+            <i></i>
+            <i></i>
+        </label>
+        <div class="logo">
+            <a href="#">PredictIt</a>
+        </div>
+        <div class="nav-wrapper">
+            <ul id="main">
+                <li><a href="{{ url_for('main.home') }}" class="cool-link">Home</a></li>
+                {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('main.profile') }}" class="cool-link">Profile</a></li>
+                {% endif %}
+                {% if not current_user.is_authenticated %}
+                <li><a href="{{ url_for('auth.login') }}" class="cool-link">Login</a></li>
+                <li><a href="{{ url_for('auth.register') }}" class="cool-link">Register</a></li>
+                {% endif %}
+                {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('auth.logout') }}" class="cool-link">Logout</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('main.map') }}" class="cool-link">Map</a></li>
+                <li><a href="{{ url_for('main.prediction') }}" class="cool-link">Predict</a></li>
+            </ul>
+        </div>
+    </nav>
 
 
-<div class="column is-4 is-offset-4">
-    <h3 class="title">Login</h3>
-    <div class="box">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
+    <div class="column is-4 is-offset-4">
+        <h3 class="title">Login</h3>
+        <div class="box">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
             <div class="notification is-danger">
-                    {{ messages[0] }} 
+                {{ messages[0] }}
             </div>
 
-        {% endif %}
-        {% endwith %}
-        <form method="POST" action="/login.html">
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="email" name="email" placeholder="Your Email" autofocus="">
+            {% endif %}
+            {% endwith %}
+            <form method="POST" action="/login.html">
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-large" type="email" name="email" placeholder="Your Email" autofocus="">
+                    </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="password" name="password" placeholder="Your Password">
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-large" type="password" name="password" placeholder="Your Password">
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <label class="checkbox">
-                    <input type="checkbox">
-                    Remember me
-                </label>
-            </div>
-            <button class="button is-block is-info is-large is-fullwidth">Login</button>
-        </form>
+                <div class="field">
+                    <label class="checkbox">
+                        <input type="checkbox">
+                        Remember me
+                    </label>
+                </div>
+                <button class="button is-block is-info is-large is-fullwidth">Login</button>
+            </form>
+        </div>
     </div>
-</div>
 
 
 </body>
+
 </html>
